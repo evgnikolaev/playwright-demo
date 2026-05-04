@@ -4,6 +4,10 @@ const TEST_USER_EMAIL = "test@test.ru";
 const TEST_USER_PASSWORD = "Qwerty";
 const API_URL = "http://localhost:3001/api";
 
+
+
+
+
 test.describe("Auth", () => {
   let createdUserEmail: string | null = null;
 
