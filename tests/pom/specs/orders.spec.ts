@@ -7,7 +7,7 @@ test.describe("Orders", () => {
 
   test.afterEach(async ({ request }) => {
     const cleanupApi = new CleanupApi(request);
-    cleanupApi.deleteOrdersByEmail(testUsers.existing.email);
+    await cleanupApi.deleteOrdersByEmail(testUsers.existing.email);
   });
 
   test("make order with login in checkout", async ({ homePage, checkoutPage, ordersPage }) => {
