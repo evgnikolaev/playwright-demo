@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/app.fixture";
+import { questTest as test } from "../../fixtures/app.fixture";
 
 test("Catalog opens and shows cards", async ({ homePage }) => {
   await homePage.open();
@@ -16,6 +16,6 @@ test("Guest opens cart and navigates to cart page", async ({ homePage }) => {
   await homePage.open();
   await homePage.addFirstCatToCart();
   await homePage.openCart();
-    await homePage.gotoCartPage();
+  await homePage.gotoCartPage();
   await homePage.assertCartPageOpened();
 });

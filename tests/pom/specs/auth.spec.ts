@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/app.fixture";
+import { questTest as test } from "../../fixtures/app.fixture";
 import { CleanupApi } from "../api/CleanupApi";
 import { testUsers } from "../data/testData";
 

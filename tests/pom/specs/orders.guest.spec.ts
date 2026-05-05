@@ -1,4 +1,4 @@
-import { authorizedTest as test } from "../../fixtures/app.fixture";
+import { questTest as test } from "../../fixtures/app.fixture";
 import { CleanupApi } from "../api/CleanupApi";
 import { testUsers, testAdress } from "../data/testData";
 
@@ -10,10 +10,11 @@ test.describe("Orders", () => {
     await cleanupApi.deleteOrdersByEmail(testUsers.existing.email);
   });
 
-  test("Authorized user makes order without manual login", async ({ homePage, checkoutPage, ordersPage }) => {
+  test("make order with login in checkout", async ({ homePage, checkoutPage, ordersPage }) => {
     await homePage.open();
     await homePage.addFirstCatToCart();
     await homePage.gotoCheckoutFromCart();
+    await checkoutPage.signInInCheckout(testUsers.existing.email, testUsers.existing.password);
     await checkoutPage.fillAdress(testAdress);
     await checkoutPage.submit();
     await ordersPage.open();
