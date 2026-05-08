@@ -1,4 +1,6 @@
 import { expect, type Page } from "@playwright/test";
+import { CatsApi } from "../api/mockApi/catsApi";
+import { CartApi } from "../api/mockApi/cartApi";
 
 export class HomePage {
   constructor(private page: Page) {
@@ -9,9 +11,35 @@ export class HomePage {
     this.page.goto("/");
   }
 
+  private getModalLocator() {
+    return this.page.getByTestId("modal");
+  }
+
+  private getCartDrawerLocator() {
+    return this.page.getByTestId("cartDrawer");
+  }
+
   async addFirstCatToCart() {
-    await this.page.getByTestId("catCard_0").getByTestId("addToCartButton").click();
+    await this.openItemDetailModal();
     await this.page.getByTestId("catModalAddToCart").click();
+  }
+
+  async openItemDetailModal() {
+    await this.page.getByTestId("catCard_0").getByTestId("addToCartButton").click();
+  }
+
+  async setupApiEmptyCart() {
+    const catsApi = new CatsApi(this.page);
+    const cartApi = new CartApi(this.page);
+    await cartApi.setEmptyCart();
+    await catsApi.setCatsItems();
+  }
+
+  async setupApiCartWithItem() {
+    const catsApi = new CatsApi(this.page);
+    const cartApi = new CartApi(this.page);
+    await cartApi.setCartWithOneItem();
+    await catsApi.setCatsItems();
   }
 
   async openCart() {
@@ -44,5 +72,21 @@ export class HomePage {
   async assertCartPageOpened() {
     await expect(this.page).toHaveURL(/\/cart$/);
     await expect(this.page.getByRole("heading", { name: "Корзина" })).toBeVisible();
+  }
+
+  async assertCorrectPageViewWithItems() {
+    await expect(this.page).toHaveScreenshot("homePageWithItems.png");
+  }
+
+  async assertCorrectPageViewWithOpenDetailModal() {
+    await expect(this.getModalLocator()).toHaveScreenshot("detailItemModal.png");
+  }
+
+  async assertCorrectPageViewWithOpenCartEmptyDrawer() {
+    await expect(this.getCartDrawerLocator()).toHaveScreenshot("cartEmptyDrawer.png");
+  }
+
+  async assertCorrectPageViewWithOpenCartDrawerWithOneItem() {
+    await expect(this.getCartDrawerLocator()).toHaveScreenshot("cartDrawerWithOneItem.png");
   }
 }

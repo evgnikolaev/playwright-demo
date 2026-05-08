@@ -14,7 +14,7 @@ type MyFixtures = {
   authPage: AuthModal;
   checkoutPage: CheckoutPage;
   ordersPage: OrdersPage;
-  сartPage: CartPage;
+  cartPage: CartPage;
 };
 
 type AppOptions = {
@@ -38,9 +38,9 @@ const appTest = base.extend<MyFixtures>({
     const ordersPage = new OrdersPage(page);
     await use(ordersPage);
   },
-  сartPage: async ({ page }, use) => {
-    const сartPage = new CartPage(page);
-    await use(сartPage);
+  cartPage: async ({ page }, use) => {
+    const cartPage = new CartPage(page);
+    await use(cartPage);
   },
 });
 

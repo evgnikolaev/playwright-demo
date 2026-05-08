@@ -12,6 +12,11 @@ export class AuthModal {
   async openRegisterButton() {
     await this.page.getByTestId("registerButton").click();
   }
+
+  private getModalLocator() {
+    return this.page.getByTestId("modal");
+  }
+
   async signIn(email: string, password: string) {
     await this.open();
     await this.page.getByLabel("Email").fill(email);
@@ -33,7 +38,15 @@ export class AuthModal {
     await expect(this.page.getByTestId("signOutButton")).toBeVisible();
   }
 
-   async assertError(message:string) {
+  async assertError(message: string) {
     await expect(this.page.getByText(message)).toBeVisible();
+  }
+
+  async assertSignInModalHasCorrectView() {
+    await expect(this.getModalLocator()).toHaveScreenshot("signInModal.png");
+  }
+
+  async assertSignUpModalHasCorrectView() {
+    await expect(this.getModalLocator()).toHaveScreenshot("signUpModal.png");
   }
 }
