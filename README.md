@@ -161,3 +161,14 @@ npm run lint
   - `src/cart/CartContext.tsx`
 
 ---
+
+
+
+## Запуск скриншотных тестов в докере  
+docker pull mcr.microsoft.com/playwright:v1.59.1-noble
+docker run -it --rm --ipc=host -v /Users/enikolaev/playwright-demo/:/pwuser mcr.microsoft.com/playwright:v1.59.1-noble /bin/bash
+
+cd pwuser/
+npm i
+npx playwright test -u    - чтобы переснять в докере
+
