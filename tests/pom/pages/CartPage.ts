@@ -40,12 +40,11 @@ export class CartPage {
     await expect(this.page.getByTestId("itemCounter")).toHaveValue(value);
   }
 
-    async assertHasCorrectViewWithOneItem() {
+  async assertHasCorrectViewWithOneItem() {
     await expect(this.page).toHaveScreenshot("cartWithOneItem.png");
   }
 
   async assertHasCorrectEmptyView() {
     await expect(this.page).toHaveScreenshot("emptyCart.png");
   }
-
 }

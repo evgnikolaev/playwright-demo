@@ -36,7 +36,7 @@ test.describe("Auth", () => {
 
   test("Reject dublicate registration", async ({ homePage, authPage }) => {
     await homePage.open();
-    await authPage.signUp('test',testUsers.existing.email, testUsers.existing.password);
+    await authPage.signUp("test", testUsers.existing.email, testUsers.existing.password);
     await authPage.assertError("Пользователь с таким email уже существует");
   });
 });

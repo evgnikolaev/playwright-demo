@@ -6,7 +6,6 @@ test("Cart page empty state", async ({ cartPage }) => {
   await cartPage.assertHasCorrectEmptyView();
 });
 
-
 test("Cart page with items", async ({ cartPage }) => {
   await cartPage.setupApiWithOneItem();
   await cartPage.open();
