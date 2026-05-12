@@ -9,7 +9,7 @@ test("Catalog opens and shows cards", async ({ homePage }) => {
 test("Guest adds first cat to cart and sees badge count", async ({ homePage }) => {
   await homePage.open();
   await homePage.addFirstCatToCart();
-  await homePage.assertCartBadgeCount(5);
+  await homePage.assertCartBadgeCount(1);
 });
 
 test("Guest opens cart and navigates to cart page", async ({ homePage }) => {
