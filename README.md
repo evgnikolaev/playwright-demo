@@ -1,129 +1,78 @@
-
 # 🎭 Playwright Demo Framework
 
-> Демонстрационный проект автоматизации тестирования для портфолио QA-инженера
+> Демонстрационный проект автоматизации тестирования для портфолио QA-инженера <br>
+> **25 тестов • 99% стабильность**
 
 [![CI](https://github.com/evgnikolaev/playwright-demo/actions/workflows/playwright.yml/badge.svg)](https://github.com/evgnikolaev/playwright-demo/actions)
 
+## 🎯 Навыки
 
-## 🎯 Цель проекта
-
-Продемонстрировать навыки автоматизации тестирования на **Playwright**:
 | Навык | Реализация |
 |-------|-------------|
-| ✅ **Page Object Model (POM)** | Чистая архитектура тестов, переиспользуемые компоненты |
-| ✅ **Скриншотное тестирование** | Визуальная регрессия, запуск в Docker для стабильности |
-| ✅ **Мокирование API** | Изоляция фронтенда, тестирование граничных случаев |
-| ✅ **Негативные сценарии** | Валидация форм, ошибки сервера, неавторизованный доступ |
-| ✅ **CI/CD** | Автоматический запуск тестов в GitHub Actions |
-| ✅ **Docker-контейнеризация** | Воспроизводимое окружение для скриншотных тестов |
+| Page Object Model | Строгий Page Object Model |
+| Скриншотное тестирование | Docker + визуальная регрессия |
+| Мокирование API | Изоляция фронтенда |
+| Негативные сценарии | Валидация, ошибки |
+| CI/CD | GitHub Actions |
+| Docker | Воспроизводимое окружение |
 
-
-
-## 🛠 Технологический стек
-
-| Инструмент | Назначение |
-|------------|------------|
-| **Playwright** | E2E-фреймворк (кросс-браузерный, быстрый, надёжный) |
-| **TypeScript** | Типизация, автодополнение, самодокументируемый код |
-| **Page Object Model** | Поддержка тестов, переиспользование кода |
-| **GitHub Actions** | CI/CD (запуск при пуше и pull request) |
-| **Docker** | Воспроизводимое окружение для визуальных тестов |
-
+**Стек:** Playwright • TypeScript • POM • GitHub Actions • Docker
 
 
 
 ## 🍕 Тестируемое приложение
 
 [Cat Pizza Shop](https://github.com/osstep/cats-pizza) — учебный интернет-магазин «пиццы из котиков».<br>
-Описание приложения [ниже](#web-pizza-cat-pizza-shop)
+> 📖 [Подробное описание тестируемого приложения](./APP_DESCRIPTION.md)
 
 
-## 📋 Покрытие автотестами
 
-### 🖥️ UI-тесты (E2E)
 
-| Категория | Сценарии | Статус |
-|-----------|----------|--------|
-| **Навигация** | Переходы между страницами, работа роутинга | ✅ |
-| **Каталог** | Отображение карточек, выбор опций (шерсть/активность/топпинги) | ✅ |
-| **Корзина** | CRUD: добавление, изменение количества, удаление, очистка | ✅ |
-| **Оформление заказа** | Валидация адреса, выбор оплаты, успешное создание | ✅ |
-| **Авторизация** | Логин, регистрация, logout, перенос гостевой корзины | ✅ |
-| **История заказов** | Отображение списка заказов (гость / авторизованный) | ✅ |
+## 📋 Покрытие
 
-### 🔴 Негативные сценарии
-
-| Сценарий | Ожидаемый результат |
-|----------|---------------------|
-| Логин с неверным паролем | Сообщение об ошибке, вход не выполнен |
-| Пустые поля регистрации | Валидация на клиенте / сообщение с сервера |
-| Оформление заказа с пустой корзиной | Блокировка / перенаправление |
-| Доступ к странице заказов без авторизации | Редирект на логин или 401 |
-
-### 📸 Скриншотное тестирование
-
-| Страница | Контрольные точки |
-|----------|-------------------|
-| Главная | Отображение карточек котиков |
-| Корзина | Состояние с товарами и пустая |
-| История заказов | Список заказов (моковые данные) |
-
-### 🔌 API-тесты (прямые вызовы)
-
-| Эндпоинт | Проверки |
-|----------|----------|
-| `GET /api/cats` | Структура ответа, статус 200 |
-| `GET /api/cart` | Корзина гостя / авторизованного |
-| `POST /api/cart/items` | Добавление, дублирование |
-| `PATCH /api/cart/items/:id` | Изменение количества |
-| `DELETE /api/cart/items/:id` | Удаление товара |
-| `POST /api/orders` | Создание заказа, очистка корзины |
-| `GET /api/orders` | Получение заказов пользователя |
+**E2E:** навигация, каталог, корзина (CRUD), checkout, авторизация, оформление заказа  
+**Негатив:** неверный пароль, пустые поля, пустая корзина, без авторизации  
+**Визуальные:** главная, корзина, история заказов  
+**API:** эндпоинты (cats, cart, orders)
 
 
 ## 📁 Архитектура тестов
-```text
-tests/
-├── fixtures/                       # Кастомные фикстуры Playwright
-├── pom/
-│   ├── api/
-│   │   └── mockApi/                # Моки API для скриншотных тестов
-│   ├── data/                       # Тестовые данные
-│   ├── mockData/                   # Стабы для моковых ответов
-│   ├── pages/                      # Page Object Model
-│   │   ├── AuthModal.ts
-│   │   ├── CartPage.ts
-│   │   ├── CheckoutPage.ts
-│   │   ├── HomePage.ts
-│   │   └── OrdersPage.ts
-│   └── specs/                      # Тест-сьюты
-│       ├── visualTests/            # Визуальная регрессия
-│       ├── auth.spec.ts            # Авторизация (позитив + негатив)
-│       ├── cart.spec.ts            # CRUD корзины
-│       ├── checkout.spec.ts
-│       ├── home.spec.ts
-│       ├── orders.guest.spec.ts    # Гостевой сценарий
-│       └── orders.spec.ts          # Авторизованный сценарий
-├── setup/                          # Pre-conditions (сохранение состояния авторизации)
-└── playwright.config.ts            # Конфигурация Playwright
-```
+<pre>
+📁 <a href="./tests">tests/</a>
+├── 📁 <a href="./tests/fixtures">fixtures/</a>                       # Кастомные фикстуры Playwright
+├── 📁 <a href="./tests/pom">pom/</a>
+│   ├── 📁 <a href="./tests/pom/api">api/</a>
+│   │   └── 📁 <a href="./tests/pom/api/mockApi">mockApi/</a>                # Моки API для скриншотных тестов
+│   ├── 📁 <a href="./tests/pom/data">data/</a>                       # Тестовые данные
+│   ├── 📁 <a href="./tests/pom/mockData">mockData/</a>                   # Стабы для моковых ответов
+│   ├── 📁 <a href="./tests/pom/pages">pages/</a>                      # Page Object Model
+│   │   ├── 📄 <a href="./tests/pom/pages/AuthModal.ts">AuthModal.ts</a>
+│   │   ├── 📄 <a href="./tests/pom/pages/CartPage.ts">CartPage.ts</a>
+│   │   ├── 📄 <a href="./tests/pom/pages/CheckoutPage.ts">CheckoutPage.ts</a>
+│   │   ├── 📄 <a href="./tests/pom/pages/HomePage.ts">HomePage.ts</a>
+│   │   └── 📄 <a href="./tests/pom/pages/OrdersPage.ts">OrdersPage.ts</a>
+│   └── 📁 <a href="./tests/pom/specs">specs/</a>                      # Тест-сьюты
+│       ├── 📁 <a href="./tests/pom/specs/visualTests">visualTests/</a>            # Визуальная регрессия
+│       ├── 🧪 <a href="./tests/pom/specs/auth.spec.ts">auth.spec.ts</a>            # Авторизация (позитив + негатив)
+│       ├── 🧪 <a href="./tests/pom/specs/cart.spec.ts">cart.spec.ts</a>            # CRUD корзины
+│       ├── 🧪 <a href="./tests/pom/specs/checkout.spec.ts">checkout.spec.ts</a>
+│       ├── 🧪 <a href="./tests/pom/specs/home.spec.ts">home.spec.ts</a>
+│       ├── 🧪 <a href="./tests/pom/specs/orders.guest.spec.ts">orders.guest.spec.ts</a>    # Гостевой сценарий
+│       └── 🧪 <a href="./tests/pom/specs/orders.spec.ts">orders.spec.ts</a>          # Авторизованный сценарий
+├── 📁 <a href="./tests/setup">setup/</a>                          # Pre-conditions (сохранение состояния авторизации)
+└── ⚙️ <a href="./playwright.config.ts">playwright.config.ts</a>            # Конфигурация Playwright
+</pre>
 
 
 ## 🚀 Быстрый старт
 
 
 ```bash
-# Клонирование и установка
 git clone https://github.com/evgnikolaev/playwright-demo
 cd playwright-demo
 npm install
-
-# Все тесты
-npx playwright test
-
-# UI Mode (интерактивный отладчик)
-npm run test:ui
+npx playwright test          # все тесты
+npm run test:ui              # интерактивный режим
 ```
 
 
@@ -141,12 +90,9 @@ npm run dev:all
 Запуск скриншотных тестов в Docker 
 
 ```bash
-# Pull официальный образ Playwright
-docker pull mcr.microsoft.com/playwright:v1.59.1-noble
-
 # Запуск контейнера с монтированием текущей директории проекта
-docker run -it --rm --ipc=host -v $(pwd):/pwuser mcr.microsoft.com/playwright:v1.59.1-noble /bin/bash
 # где $(pwd) - локальный путь к пректу, например /Users/enikolaev/playwright-demo/
+docker run -it --rm --ipc=host -v $(pwd):/pwuser mcr.microsoft.com/playwright:v1.59.1-noble /bin/bash
 
 # Внутри контейнера:
 cd pwuser/
@@ -158,15 +104,7 @@ npx playwright test
   
 
 ##  📊 Отчетность и отладка
-После прогона тестов формируется:
-- HTML-отчёт (playwright-report/index.html) с видео, скриншотами, трейсами <br>
-Отчет генерируется в playwright-report/ (доступен в CI как artifact)
-
-
-
-<br><br><br><br><br><br>
-
-
+HTML-отчет с видео, скриншотами, трейсами — playwright-report/ (доступен в CI как artifact)
 
 
 

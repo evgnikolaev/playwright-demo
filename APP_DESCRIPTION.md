@@ -1,3 +1,7 @@
+## README для проекта `web-pizza`
+
+---
+
 # Web Pizza (Cat Pizza Shop)
 
 [Cat Pizza Shop](https://github.com/osstep/cats-pizza) — Учебный проект интернет‑магазина «пиццы из котиков» на стеке **React + TypeScript + Vite** с простым backend на **Express**.  
@@ -155,6 +159,4 @@ npm run lint
 - Основная бизнес‑логика фронтенда сосредоточена в контекстах:
   - `src/auth/AuthContext.tsx`
   - `src/cart/CartContext.tsx`
-
----
 
