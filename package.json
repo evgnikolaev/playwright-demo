@@ -12,7 +12,10 @@
     "preview": "vite preview",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:upd": "playwright test -u"
+    "test:upd": "playwright test -u",
+    "test:ignore-visual": "playwright test --project=chromium",
+    "test:visual": "playwright test --project=chromium-visual",
+    "docker:visual:update": "docker run --rm --ipc=host -v $(pwd):/pwuser -v /pwuser/node_modules -w /pwuser mcr.microsoft.com/playwright:v1.59.1-noble /bin/bash -c \"npm install && npx playwright test --project=chromium-visual --update-snapshots\""
   },
   "dependencies": {
     "express": "^4.21.2",
