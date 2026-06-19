@@ -71,8 +71,10 @@
 git clone https://github.com/evgnikolaev/playwright-demo
 cd playwright-demo
 npm install
-npx playwright test          # все тесты
-npm run test:ui              # интерактивный режим
+npx playwright test            # все тесты
+npm run test:ui                # интерактивный режим
+npm run test:visual            # запустить нескриншотные тесты
+npm run docker:visual:update   # обновить скришотные тесты в докере
 ```
 
 
